@@ -1,0 +1,20 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n
+                <!-- %logger{36} show classpath  [%t] show thread name-->
+            </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="dev.zopad" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
