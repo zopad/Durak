@@ -1,5 +1,6 @@
 package dev.zopad.durak.state;
 
+import dev.zopad.durak.logic.GameLogic;
 import dev.zopad.durak.logic.I18N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,14 @@ public class GameState {
         playerStates = new CopyOnWriteArrayList<>();
         deck = new Deck();
         init();
+    }
+
+    public static GameState startNewGame() {
+        GameState gameState = new GameState(4);
+        gameState.diag();
+        GameLogic gameLogic = new GameLogic(gameState);
+        gameLogic.play();
+        return gameState;
     }
 
     public int getPlayerCount() {

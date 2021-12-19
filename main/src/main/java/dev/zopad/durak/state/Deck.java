@@ -33,5 +33,15 @@ public class Deck {
         return deck;
     }
 
+    // to satisfy jackson json serializer
+    public List<Card> getDeck() {
+        return deck;
+    }
 
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "deck=" + deck +
+                '}';
+    }
 }
