@@ -2,6 +2,7 @@ package dev.zopad.durak.state;
 
 import dev.zopad.durak.logic.GameLogic;
 import dev.zopad.durak.logic.I18N;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,13 @@ public class GameState {
     private final String[] playerNames = {"Andor", "Béla", "Cecil", "Dénes", "Edmond", "Feri"};
 
     public GameState(int playerCount) {
+        this(playerCount, null);
+    }
+
+    public GameState(int playerCount, String username) {
+        if (StringUtils.isNotEmpty(username)) {
+            playerNames[0] = username;
+        }
         this.playerCount = playerCount;
         playerStates = new CopyOnWriteArrayList<>();
         deck = new Deck();
@@ -31,6 +39,14 @@ public class GameState {
 
     public static GameState startNewGame() {
         GameState gameState = new GameState(4);
+        gameState.diag();
+        GameLogic gameLogic = new GameLogic(gameState);
+        gameLogic.play();
+        return gameState;
+    }
+
+    public static GameState startNewGameOnePlayer(String username) {
+        GameState gameState = new GameState(4, username);
         gameState.diag();
         GameLogic gameLogic = new GameLogic(gameState);
         gameLogic.play();

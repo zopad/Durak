@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,9 +23,9 @@ public class DurakController {
         return "Hell0 w0rld";
     }
 
-    @GetMapping(value = "/newGame", produces = MediaType.APPLICATION_JSON_VALUE)
-    public GameState newGame() {
-        return GameState.startNewGame();
+    @GetMapping(value = "/join", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GameState newGame(@RequestParam("username") String username) {
+        return GameState.startNewGameOnePlayer(username);
     }
 
     // TODO these 2 posts should return the new state to the client (including drawn cards)
